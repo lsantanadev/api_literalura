@@ -1,4 +1,4 @@
-package br.com.literalura.demo.model;
+package br.com.literalura.model;
 
 import jakarta.persistence.*;
 
