@@ -1,4 +1,4 @@
-package br.com.literalura.demo.service;
+package br.com.literalura.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
