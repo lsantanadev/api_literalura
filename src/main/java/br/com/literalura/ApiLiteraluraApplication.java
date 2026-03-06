@@ -1,6 +1,6 @@
-package br.com.literalura.demo;
+package br.com.literalura;
 
-import br.com.literalura.demo.principal.Principal;
+import br.com.literalura.principal.Principal;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
