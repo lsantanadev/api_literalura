@@ -20,11 +20,28 @@ public class Autor {
 
     private Integer anoFalecimento;
 
-    @OneToMany(mappedBy = "autores", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Livro> livros = new ArrayList<>();
 
-    public Long getId() {
-        return id;
+
+    public Autor() {
+    }
+
+    public Autor(DadosAutor dadosAutor) {
+        this.nome = dadosAutor.nomeAutor();
+
+        try {
+            this.anoNascimento = Integer.valueOf(dadosAutor.anoNascimento());
+        } catch (NumberFormatException e) {
+            this.anoNascimento = 0;
+        }
+
+        try {
+            this.anoFalecimento = Integer.valueOf(dadosAutor.anoFalecimento());
+        } catch (NumberFormatException e) {
+            this.anoFalecimento = 0;
+        }
+
     }
 
     public void setId(Long id) {
@@ -63,11 +80,21 @@ public class Autor {
         this.livros = livros;
     }
 
+    public String getAnoFalecimentoFormatado() {
+        if (this.anoFalecimento == null) {
+            return "Desconhecido/Vivo";
+        }
+        return String.valueOf(this.anoFalecimento);
+    }
+
     @Override
     public String toString() {
-        return  "Nome='" + nome + '\'' +
+        List<String> titulosLivros = livros.stream()
+                .map(br.com.literalura.model.Livro::getTitulo)
+                .toList();
+        return "Nome='" + nome + '\'' +
                 ", anoNascimento=" + anoNascimento +
                 ", anoFalecimento=" + anoFalecimento +
-                ", livros=" + livros;
+                ", livros=" + titulosLivros;
     }
 }
