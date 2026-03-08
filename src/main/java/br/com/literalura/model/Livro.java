@@ -15,10 +15,22 @@ public class Livro {
 
     private Idioma idioma;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Autor autor;
 
     public Livro() {
+    }
+
+    public Livro(DadosLivro dadosLivro) {
+        this.titulo = dadosLivro.titulo();
+
+        if (dadosLivro.idiomas() != null && !dadosLivro.idiomas().isEmpty()) {
+            this.idioma = Idioma.fromString(dadosLivro.idiomas().get(0));
+        }
+
+        if (dadosLivro.autor() != null && !dadosLivro.autor().isEmpty()) {
+            this.autor = new Autor(dadosLivro.autor().get(0));
+        }
     }
 
     public Long getId() {
@@ -55,9 +67,9 @@ public class Livro {
 
     @Override
     public String toString() {
-        return  "titulo='" + titulo + '\'' +
+        return "titulo='" + titulo + '\'' +
                 ", idioma=" + idioma +
-                ", autor=" + autor +
+                ", autor=" + (autor != null ? autor.getNome() : "Desconhecido") +
                 ", idioma=" + idioma;
     }
 }
