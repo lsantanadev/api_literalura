@@ -25,6 +25,8 @@ public class Livro {
         this.titulo = dadosLivro.titulo();
 
         if (dadosLivro.idiomas() != null && !dadosLivro.idiomas().isEmpty()) {
+            // Lança IllegalArgumentException se o idioma não for suportado —
+            // tratado no chamador (Principal.buscarLivroWeb)
             this.idioma = Idioma.fromString(dadosLivro.idiomas().get(0));
         }
 
@@ -69,7 +71,6 @@ public class Livro {
     public String toString() {
         return "titulo='" + titulo + '\'' +
                 ", idioma=" + idioma +
-                ", autor=" + (autor != null ? autor.getNome() : "Desconhecido") +
-                ", idioma=" + idioma;
+                ", autor=" + (autor != null ? autor.getNome() : "Desconhecido");
     }
 }
